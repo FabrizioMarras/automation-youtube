@@ -59,23 +59,39 @@ Place this file in the root directory of the project.
 Make sure your .gitignore file includes entries to exclude virtual environments, API credentials, and other unnecessary files:
 
 ```bash
+.env
 env/
 __pycache__/
 credentials-youtube-posts-automation.json
 ```
 
+
 ## Usage
 
 ### 1. Prepare the Excel File
-- The Excel file should be stored in a specific folder within Google Drive.
+
+- Select one of the folders in your Google Drive as main folder for this project.
+- Create a subfolder containing the Excel file with all the information about the videos and metadata (content, tags, etc.).
+- Save the main folder ID and subfolder name in your `.env` file:
+
+```bash
+MAIN_FOLDER_ID='your_google_drive_folder_ID'
+SUBFOLDER_NAME='your_subfolder_name'
+```
+
 - The Excel file must contain the following columns:
     - No: The number associated with the video file name.
-    - Date: The date to schedule the post (time will be set to 5:00 PM CET).
+    - Date: The date to schedule the post (time will be set to 5:00 PM CET by default).
     - Test: The test name associated with the video.
     - Name: The type of test (e.g., Watch, Follow).
     - Char: The character name.
     - AInsyte Message: The content of the post.
     - Hash #: Hashtags for the post (multiple columns).
+
+- The Videos should follow the structure:
+    - Parent folder with name containing the "Test" name associated with the video.
+    - Child folder with name containing the "No" associated with the video file name.
+    - Video contained inside child folder with name `Post {No}.mp4`.
 
 ### 2. Run the Application
 Execute the main script to start the process:
@@ -103,6 +119,7 @@ youtube-video-scheduler/
 ├── main.py                                     # Main script
 ├── requirements.txt                            # List of Python dependencies
 ├── .gitignore                                  # Git ignore file
+├── .env                                        # env file (not included)
 ├── README.md                                   # This file
 └── src/                                        # Source files
     ├── auth.py                                 # Authentication with Google services

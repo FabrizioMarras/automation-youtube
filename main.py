@@ -1,4 +1,6 @@
 # main.py
+import os
+from dotenv import load_dotenv
 from src.auth import get_authenticated_service
 from src.fetch_xlsx import fetch_xlsx_data
 from src.fetch_video import fetch_video
@@ -7,13 +9,17 @@ from src.upload_video import upload_video
 from pytz import timezone
 import pandas as pd
 
+# Load environment variables from .env file
+load_dotenv()
+
 def main():
     youtube, drive = get_authenticated_service()
     cet = timezone('CET')
     utc = timezone('UTC')
 
-    main_folder_id = '15-XLoeY65jSyh6sXlhinrs3r1srf0lyp'
-    subfolder_name = 'Harry Potter (HP)'
+    # Fetch the main folder ID and subfolder name from environment variables
+    main_folder_id = os.getenv('MAIN_FOLDER_ID')
+    subfolder_name = os.getenv('SUBFOLDER_NAME')
     
     # Locate the character folder
     subfolders = find_files(drive, f"name='{subfolder_name}' and '{main_folder_id}' in parents and mimeType='application/vnd.google-apps.folder'")

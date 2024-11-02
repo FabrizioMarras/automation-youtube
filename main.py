@@ -14,8 +14,6 @@ load_dotenv()
 
 def main():
     youtube, drive = get_authenticated_service()
-    cet = timezone('CET')
-    utc = timezone('UTC')
 
     # Fetch the main folder ID and subfolder name from environment variables
     main_folder_id = os.getenv('MAIN_FOLDER_ID')

@@ -1,15 +1,28 @@
-# youtube_auth.py
-from google_auth_oauthlib.flow import InstalledAppFlow
+from google.oauth2 import service_account
 from googleapiclient.discovery import build
+from src.config import Config
 
-def get_authenticated_service():
-    CLIENT_SECRETS_FILE = "credentials-youtube-posts-automation.json"
+def get_google_services():
+    """
+    Authenticates and returns both Google Drive and YouTube service objects.
+
+    Returns:
+        A tuple of YouTube and Google Drive service objects.
+    """
     SCOPES = [
-        'https://www.googleapis.com/auth/youtube.force-ssl', 
-        'https://www.googleapis.com/auth/drive.readonly']
+        'https://www.googleapis.com/auth/youtube.force-ssl',
+        'https://www.googleapis.com/auth/drive'
+    ]
 
-    flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
-    credentials = flow.run_local_server(port=0)
+    credentials = service_account.Credentials.from_service_account_file(
+        Config.SERVICE_ACCOUNT_FILE, scopes=SCOPES
+    )
+
+    # If using domain-wide delegation, specify the user to impersonate
+    credentials = credentials.with_subject(Config.DELEGATED_USER_EMAIL)
+
+    # Build the service objects for YouTube and Google Drive
     youtube = build('youtube', 'v3', credentials=credentials)
     drive = build('drive', 'v3', credentials=credentials)
+
     return youtube, drive

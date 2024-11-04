@@ -1,4 +1,4 @@
 .env
 env/
 __pycache__/
-credentials-youtube-posts-automation.json
+service_account_key.json

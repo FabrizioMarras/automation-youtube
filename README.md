@@ -51,9 +51,10 @@ Install the required Python packages using:
 pip install -r requirements.txt
 ```
 
-### 5. Set Up OAuth 2.0 Credentials
+### 5. Set Up Service Account Credentials
 Obtain the `service_account_key.json` credentials file from Google Cloud Console.
 Place this file in the root directory of the project.
+If not sure how to do it, please follow Google documentation.
 
 ### 6. Configure .gitignore
 Make sure your .gitignore file includes entries to exclude virtual environments, API credentials, and other unnecessary files:

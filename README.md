@@ -84,7 +84,7 @@ SUBFOLDER_NAME='your_subfolder_name'
     - No: The number associated with the video file name.
     - Date: The date to schedule the post (time will be set to 5:00 PM CET by default).
     - Test: The test name associated with the video.
-    - Name: The type of test (e.g., Watch, Follow).
+    - Name: The type of test (e.g., Astrology, Watch, Follow).
     - Char: The character name.
     - AInsyte Message: The content of the post.
     - Hash #: Hashtags for the post (multiple columns).
@@ -93,6 +93,13 @@ SUBFOLDER_NAME='your_subfolder_name'
     - Parent folder with name containing the "Test" name associated with the video.
     - Child folder with name containing the "No" associated with the video file name.
     - Video contained inside child folder with name `Post {No}.mp4`.
+
+Example:
+```bash
+Excel File Path: MainFolder/Subfolder Name (SN)/XLSXFileName.xlsx
+
+Video File Path: MainFolder/Subfolder Name (SN)/SN01 - SN30 TestYpe - Subfolder Name/SN05 - TestName - SubfolderName/Post SN05.mp4
+```
 
 ### 2. Run the Application
 Execute the main script to start the process:
